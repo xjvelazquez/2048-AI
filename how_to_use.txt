@@ -1,0 +1,60 @@
+Eric's tester
+
+Description: The files in here aren't the testers, but just a few files you can
+compare against. The real test is the block of code you copied into main.py,
+which basically has two parts:
+
+-t 3: lets you create a new test on a customized bounds of seeds. Not recommended for average student since I already compiled
+       50 complete seeds/runs for you to test, but you can create more tests if you like.
+-t 4: tests your code with given state and sol files. Just change the start_seed and end_seed numbers to set which files you 
+       want to run.
+
+
+
+How to use my testers:
+
+I've set up tests for first 50 seeds (in increments of 10). 
+They are part of the .zip file you downloaded from slack. You can do:
+
+1. paste the block of code that I wrote on slack in your main.py (follow my instructions on slack)
+2. edit which files you want to compare against; this can be done by changing the start_seed and end_seed in main -t 4
+3. Run:
+
+python main.py -t 4 > output_name
+
+4. Then, just look for any instances of "Incorrect" in your file
+
+grep 'Incorrect' output_name
+
+5. If you find any instances of incorrect, your tree was build wrong at that point, or expectimax failed.
+    Might be good to load up the state at that line of failure, and analyze from there.
+
+
+
+How to create more tests:
+
+1. Edit seed bounds in main -t 3
+2. Run:
+
+python main.py -t 3 > out
+sed -n 'n;p' out > seed_xx_to_xx_sols.txt
+sed -n 'p;n' out > seed_xx_to_xx_states.txt
+
+3. Go to seed_xx_to_xx_states.txt, and do the following in vim:
+
+:%s/\]//g
+:%s/\[//g
+:%s/\,//g
+
+4. Go back to terminal, and run:
+
+rm out
+
+5. You're done! To run that test you just made, follow the previous directions above
+
+
+
+Feel free to make more tests by changing the seed bounds, and saving the output into another file.
+You can then compare with friends on those seed bounds.
+
+If you have any questions, ask me (Eric). Happy testing! :3
